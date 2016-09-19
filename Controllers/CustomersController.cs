@@ -144,6 +144,7 @@ namespace Fortune_Teller_MVC.Controllers
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //redirects customer straight to details page
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BirthMonthID,FavoriteColorID,NumberOfSiblingsID,FirstName,LastName,Age,CustomerID")] Customer customer)
