@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Fortune_Teller_MVC.Models.FavoriteColor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FavoriteColorName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FavoriteColorName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.FavoriteColorID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.FavoriteColorID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.FavoriteColorID })
+        </td>
+    </tr>
+}
+
+</table>

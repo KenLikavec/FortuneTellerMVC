@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FortuneTellerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BirthMonths">
+          <Key>
+            <PropertyRef Name="BirthMonthID" />
+          </Key>
+          <Property Name="BirthMonthID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BirthMonthName" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="BirthMonthID" Type="int" Nullable="false" />
+          <Property Name="FavoriteColorID" Type="int" Nullable="false" />
+          <Property Name="NumberOfSiblingsID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FavoriteColors">
+          <Key>
+            <PropertyRef Name="FavoriteColorID" />
+          </Key>
+          <Property Name="FavoriteColorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FavoriteColorName" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NumberOfSiblings">
+          <Key>
+            <PropertyRef Name="NumberOfSiblingsID" />
+          </Key>
+          <Property Name="NumberOfSiblingsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumOfSibs" Type="nchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Customers_BirthMonths">
+          <End Role="BirthMonths" Type="Self.BirthMonths" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BirthMonths">
+              <PropertyRef Name="BirthMonthID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="BirthMonthID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_FavoriteColors">
+          <End Role="FavoriteColors" Type="Self.FavoriteColors" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FavoriteColors">
+              <PropertyRef Name="FavoriteColorID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="FavoriteColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_NumberOfSiblings">
+          <End Role="NumberOfSiblings" Type="Self.NumberOfSiblings" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NumberOfSiblings">
+              <PropertyRef Name="NumberOfSiblingsID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="NumberOfSiblingsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FortuneTellerDBModelStoreContainer">
+          <EntitySet Name="BirthMonths" EntityType="Self.BirthMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FavoriteColors" EntityType="Self.FavoriteColors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NumberOfSiblings" EntityType="Self.NumberOfSiblings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customers_BirthMonths" Association="Self.FK_Customers_BirthMonths">
+            <End Role="BirthMonths" EntitySet="BirthMonths" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_FavoriteColors" Association="Self.FK_Customers_FavoriteColors">
+            <End Role="FavoriteColors" EntitySet="FavoriteColors" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_NumberOfSiblings" Association="Self.FK_Customers_NumberOfSiblings">
+            <End Role="NumberOfSiblings" EntitySet="NumberOfSiblings" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FortuneTellerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BirthMonth">
+          <Key>
+            <PropertyRef Name="BirthMonthID" />
+          </Key>
+          <Property Name="BirthMonthID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BirthMonthName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_BirthMonths" FromRole="BirthMonths" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="BirthMonthID" Type="Int32" Nullable="false" />
+          <Property Name="FavoriteColorID" Type="Int32" Nullable="false" />
+          <Property Name="NumberOfSiblingsID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BirthMonth" Relationship="Self.FK_Customers_BirthMonths" FromRole="Customers" ToRole="BirthMonths" />
+          <NavigationProperty Name="FavoriteColor" Relationship="Self.FK_Customers_FavoriteColors" FromRole="Customers" ToRole="FavoriteColors" />
+          <NavigationProperty Name="NumberOfSibling" Relationship="Self.FK_Customers_NumberOfSiblings" FromRole="Customers" ToRole="NumberOfSiblings" />
+        </EntityType>
+        <EntityType Name="FavoriteColor">
+          <Key>
+            <PropertyRef Name="FavoriteColorID" />
+          </Key>
+          <Property Name="FavoriteColorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FavoriteColorName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_FavoriteColors" FromRole="FavoriteColors" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="NumberOfSibling">
+          <Key>
+            <PropertyRef Name="NumberOfSiblingsID" />
+          </Key>
+          <Property Name="NumberOfSiblingsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumOfSibs" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_NumberOfSiblings" FromRole="NumberOfSiblings" ToRole="Customers" />
+        </EntityType>
+        <Association Name="FK_Customers_BirthMonths">
+          <End Role="BirthMonths" Type="Self.BirthMonth" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BirthMonths">
+              <PropertyRef Name="BirthMonthID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="BirthMonthID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_FavoriteColors">
+          <End Role="FavoriteColors" Type="Self.FavoriteColor" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FavoriteColors">
+              <PropertyRef Name="FavoriteColorID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="FavoriteColorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_NumberOfSiblings">
+          <End Role="NumberOfSiblings" Type="Self.NumberOfSibling" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NumberOfSiblings">
+              <PropertyRef Name="NumberOfSiblingsID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="NumberOfSiblingsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FortuneTellerDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BirthMonths" EntityType="Self.BirthMonth" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="FavoriteColors" EntityType="Self.FavoriteColor" />
+          <EntitySet Name="NumberOfSiblings" EntityType="Self.NumberOfSibling" />
+          <AssociationSet Name="FK_Customers_BirthMonths" Association="Self.FK_Customers_BirthMonths">
+            <End Role="BirthMonths" EntitySet="BirthMonths" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_FavoriteColors" Association="Self.FK_Customers_FavoriteColors">
+            <End Role="FavoriteColors" EntitySet="FavoriteColors" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_NumberOfSiblings" Association="Self.FK_Customers_NumberOfSiblings">
+            <End Role="NumberOfSiblings" EntitySet="NumberOfSiblings" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FortuneTellerDBModelStoreContainer" CdmEntityContainer="FortuneTellerDBEntities1">
+          <EntitySetMapping Name="BirthMonths">
+            <EntityTypeMapping TypeName="FortuneTellerDBModel.BirthMonth">
+              <MappingFragment StoreEntitySet="BirthMonths">
+                <ScalarProperty Name="BirthMonthID" ColumnName="BirthMonthID" />
+                <ScalarProperty Name="BirthMonthName" ColumnName="BirthMonthName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="FortuneTellerDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="BirthMonthID" ColumnName="BirthMonthID" />
+                <ScalarProperty Name="FavoriteColorID" ColumnName="FavoriteColorID" />
+                <ScalarProperty Name="NumberOfSiblingsID" ColumnName="NumberOfSiblingsID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FavoriteColors">
+            <EntityTypeMapping TypeName="FortuneTellerDBModel.FavoriteColor">
+              <MappingFragment StoreEntitySet="FavoriteColors">
+                <ScalarProperty Name="FavoriteColorID" ColumnName="FavoriteColorID" />
+                <ScalarProperty Name="FavoriteColorName" ColumnName="FavoriteColorName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumberOfSiblings">
+            <EntityTypeMapping TypeName="FortuneTellerDBModel.NumberOfSibling">
+              <MappingFragment StoreEntitySet="NumberOfSiblings">
+                <ScalarProperty Name="NumberOfSiblingsID" ColumnName="NumberOfSiblingsID" />
+                <ScalarProperty Name="NumOfSibs" ColumnName="NumOfSibs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

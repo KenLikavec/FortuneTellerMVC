@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FortuneTellerDBModelStoreContainer" CdmEntityContainer="FortuneTellerDBEntities1">
+    <EntitySetMapping Name="BirthMonths">
+      <EntityTypeMapping TypeName="FortuneTellerDBModel.BirthMonth">
+        <MappingFragment StoreEntitySet="BirthMonths">
+          <ScalarProperty Name="BirthMonthID" ColumnName="BirthMonthID" />
+          <ScalarProperty Name="BirthMonthName" ColumnName="BirthMonthName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="FortuneTellerDBModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="BirthMonthID" ColumnName="BirthMonthID" />
+          <ScalarProperty Name="FavoriteColorID" ColumnName="FavoriteColorID" />
+          <ScalarProperty Name="NumberOfSiblingsID" ColumnName="NumberOfSiblingsID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FavoriteColors">
+      <EntityTypeMapping TypeName="FortuneTellerDBModel.FavoriteColor">
+        <MappingFragment StoreEntitySet="FavoriteColors">
+          <ScalarProperty Name="FavoriteColorID" ColumnName="FavoriteColorID" />
+          <ScalarProperty Name="FavoriteColorName" ColumnName="FavoriteColorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumberOfSiblings">
+      <EntityTypeMapping TypeName="FortuneTellerDBModel.NumberOfSibling">
+        <MappingFragment StoreEntitySet="NumberOfSiblings">
+          <ScalarProperty Name="NumberOfSiblingsID" ColumnName="NumberOfSiblingsID" />
+          <ScalarProperty Name="NumOfSibs" ColumnName="NumOfSibs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
